@@ -1,0 +1,436 @@
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 25px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.loadingContainer, .errorContainer {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.4rem;
+    color: #903434;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    color: #3b82f6; /* Xanh dương */
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* --- HEADER --- */
+.header {
+    margin-bottom: 30px;
+}
+
+.titleSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.tourName {
+    font-size: 2.5rem;
+    color: #1f2937;
+    margin: 0;
+}
+
+.priceTag {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ef4444; /* Màu đỏ nổi bật (CTA mạnh) */
+}
+
+.metaInfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    color: #4b5563;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.metaInfo span {
+    font-weight: 500;
+}
+
+.bannerImage img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+    line-height: 1.7;
+    color: #374151;
+    margin-top: 30px;
+}
+
+.description h3 {
+    color: #1f2937;
+    border-bottom: 2px solid #3b82f6; /* Xanh dương */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* --- TABS (Đảm bảo hiển thị) --- */
+.tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    position: relative; /* Đảm bảo tabs không bị che */
+    z-index: 5;
+    background-color: #fff;
+}
+
+.tabBtn {
+    padding: 15px 30px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.tabBtn:hover {
+    color: #3b82f6;
+}
+
+.tabBtn.active {
+    color: #3b82f6; /* Xanh dương chủ đạo */
+    border-bottom-color: #3b82f6;
+    background-color: #f3f4f6;
+}
+
+/* --- ITINERARY STYLES (Phong cách Timeline) --- */
+.itineraryList {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-left: 20px; /* Tạo không gian cho đường kẻ timeline */
+    position: relative;
+}
+
+.itineraryList::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #d1d5db; /* Đường kẻ xám nhạt */
+}
+
+.itineraryItem {
+    display: flex;
+    gap: 20px;
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    margin-left: -20px; /* Kéo Item lùi về để Badge ôm đường kẻ */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dayBadge {
+    font-weight: 700;
+    color: white;
+    background-color: #3b82f6;
+    min-width: 90px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    padding: 0 10px;
+    position: absolute;
+    left: -40px; /* Di chuyển ra ngoài Item */
+    top: 20px;
+}
+
+.dayContent {
+    flex: 1;
+    padding-left: 70px; /* Đẩy nội dung qua khỏi vị trí badge */
+}
+
+.dayTitle {
+    margin: 0 0 10px 0;
+    color: #1f2937;
+    font-size: 1.4rem;
+}
+
+.detailsGrid {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #e5e7eb;
+    display: grid;
+    gap: 10px;
+    font-size: 0.95rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* --- SCHEDULE TABLE STYLES --- */
+.scheduleTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scheduleTable th, .scheduleTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.scheduleTable th {
+    background-color: #3b82f6; /* Nền xanh cho Header */
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.scheduleTable tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.scheduleTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.dateHighlight {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.seatsOk {
+    color: #10b981; /* Xanh lá cây (Available) */
+    font-weight: 700;
+}
+
+.seatsFull {
+    color: #ef4444; /* Đỏ (Full) */
+    font-weight: 700;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: #d1fae5; /* Màu nền cho CONFIRMED */
+    color: #065f46;
+}
+
+.bookBtn {
+    background-color: #ef4444; /* Đỏ (CTA) */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.bookBtn:hover {
+    background-color: #dc2626;
+}
+
+.bookBtn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.emptyText {
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+    padding: 30px;
+    border: 1px dashed #e5e7eb;
+    border-radius: 8px;
+}
+
+.actionButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Action Buttons (MỚI - dùng cho Thêm/Sửa Lịch Trình Chi Tiết) --- */
+.actionBtn {
+    padding: 8px 15px; /* Giảm padding một chút để nhỏ hơn nút chính */
+    border: none;
+    border-radius: 6px;
+    width: 200px;
+    height: fit-content;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.editButton {
+    background-color: #fcd34d; /* Amber-300 */
+    color: #78350f; /* Amber-900 */
+}
+
+.editButton:hover {
+    background-color: #fbbf24; /* Amber-400 */
+    transform: translateY(-1px);
+}
+
+.addButton {
+    background-color: #10b981; /* Green-500 */
+    color: white;
+}
+
+.addButton:hover {
+    background-color: #059669; /* Green-600 */
+    transform: translateY(-1px);
+}
+
+/* --- Button Style Chung --- */
+.schBtn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.schBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.schBtn:active {
+  transform: translateY(0);
+}
+
+/* Button: Edit (Sửa) */
+.editButton {
+  background-color: #f59e0b; /* Màu cam/vàng */
+  color: white;
+  margin-right: 8px;
+}
+
+.editButton:hover {
+  background-color: #d97706;
+}
+
+/* Button: Delete (Xóa) */
+.deleteButton {
+  background-color: #ef4444; /* Màu đỏ */
+  color: white;
+  margin-right: 8px;
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+}
+
+.imagesSection {
+  margin-top: 24px;
+}
+.imagesGrid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.imageItem {
+  position: relative;
+  width: 180px;
+}
+.tourImage {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.deleteButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.uploadLabel {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #3498db;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+}
+.uploadLabel:hover {
+  background: #217dbb;
+}
+
+.statusSuccess {
+  color: #2ecc40;
+  background: #eafaf1;
+  border: 2px solid #2ecc40;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  display: inline-block;
+  display: block; /* Thêm dòng này */
+  margin-top: 12px;
+}
+
+.statusError {
+  color: #e74c3c;
+  background: #fdecea;
+  border: 2px solid #e74c3c;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  display: inline-block;
+  display: block; /* Thêm dòng này */
+  margin-top: 12px;
+}

@@ -1,0 +1,21 @@
+# --- BẢO MẬT (Quan trọng nhất) ---
+.env
+
+# --- IDE & Hệ thống (File rác) ---
+.idea/
+.vscode/
+.vs/
+*.suo
+*.user
+*.sln.docstates
+*.DS_Store
+
+# --- Java Build ---
+**/target/
+**/*.class
+
+# --- Node/Frontend Build ---
+**/node_modules/
+**/dist/
+**/build/
+**/.npm/

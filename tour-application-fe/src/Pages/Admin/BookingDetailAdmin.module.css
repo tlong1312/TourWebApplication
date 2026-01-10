@@ -1,0 +1,205 @@
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #222;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4f46e5;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.value {
+  color: #222;
+  margin-left: 8px;
+}
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.infoTable th, .infoTable td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.infoTable th {
+  background: #3b82f6;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.infoTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.statusBadge {
+  background-color: #e6fff4;
+  color: #059669;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 14px;
+  display: inline-block;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(5,150,105,0.07);
+}
+
+.statusCancelled {
+  background-color: #ffeaea;
+  color: #d32f2f;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 14px;
+  display: inline-block;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(211,47,47,0.07);
+}
+
+.statusPending {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 14px;
+  display: inline-block;
+  font-size: 1rem;
+  box-shadow: 0 1px 4px rgba(181,159,59,0.07);
+}
+
+.formRow {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.formLabel {
+  font-weight: 600;
+  margin-right: 12px;
+  min-width: 140px;
+}
+
+.formInput, .formSelect {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  font-size: 1rem;
+  width: 260px;
+}
+
+.formButton {
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: background 0.2s;
+}
+
+.formButton:hover {
+  background: #4338ca;
+}
+
+.messageSuccess {
+  color: #2ecc40;
+  background: #eafaf1;
+  border: 2px solid #2ecc40;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.messageError {
+  color: #e74c3c;
+  background: #fdecea;
+  border: 2px solid #e74c3c;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 24px;
+  display: block;
+}
+
+.infoTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 12px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.infoTable th, .infoTable td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.infoTable th {
+  background: #3b82f6;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 220px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.infoTable tr:last-child td {
+  border-bottom: none;
+}
+
+.infoTable tbody tr:nth-child(even) td {
+  background: #f6f8fa;
+}
+
+.infoTable tbody tr:hover td {
+  background: #e0e7ff;
+  transition: background 0.2s;
+}
+
+.infoTable td {
+  vertical-align: middle;
+}

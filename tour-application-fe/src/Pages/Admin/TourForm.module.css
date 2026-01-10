@@ -1,0 +1,399 @@
+/* TourForm.module.css */
+
+/* --- Biến màu & Cấu hình chung --- */
+.formContainer {
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-text-primary: #111827;
+    --color-text-label: #374151;
+    --color-border: #d1d5db;
+    --color-bg-light: #f9fafb;
+    --color-bg-white: #ffffff;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+
+    /* Thêm màu cho Message Box */
+    --color-success-bg: #d1fae5;
+    --color-success-text: #059669;
+    --color-error-bg: #fee2e2;
+    --color-error-text: #ef4444;
+    --color-info-bg: #e0f2fe;
+    --color-info-text: #0369a1;
+  }
+  
+  .formContainer {
+    max-width: 900px; /* Form tour cần rộng hơn */
+    margin: 40px auto;
+    padding: 40px;
+    background-color: var(--color-bg-white);
+    border: 1px solid #e5e7eb;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  
+  .formContainer h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--color-primary);
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #6b7280; 
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* Nút Quay lại */
+  .backBtn {
+    padding: 8px 15px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-bottom: 15px;
+  }
+  
+  .backBtn:hover {
+    background-color: #e5e7eb;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* --- Section (Từng khối nội dung) --- */
+  .editFormContainer {
+    border-top: 2px solid #f3f4f6; 
+    padding-top: 20px;
+  }
+
+  .section {
+      padding-bottom: 20px;
+      border-bottom: 1px dashed var(--color-border);
+  }
+  
+  .section:last-child {
+      border-bottom: none;
+  }
+  
+  .sectionTitle {
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      margin-bottom: 15px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+  }
+  
+  /* --- Input & Label --- */
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .formGroup label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-label);
+  }
+  
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea,
+  .input, .textarea { /* Thêm các class input/textarea/select */
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #333;
+    box-sizing: border-box;
+    transition: all 0.2s;
+  }
+  
+  .formGroup input:focus,
+  .formGroup select:focus,
+  .formGroup textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  }
+  
+  .formGroup textarea {
+      resize: vertical;
+      min-height: 80px;
+  }
+
+  .required {
+      color: #ef4444; /* Đỏ */
+  }
+
+  /* --- Grid Layouts (Chia cột) --- */
+  .gridTwo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 15px;
+  }
+  
+  .gridThree {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 15px;
+  }
+  
+  .gridFour {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+  }
+
+  /* Class dùng để input span 2 cột trong grid 2 */
+  .spanTwo {
+    grid-column: span 2;
+  }
+  
+  /* Responsive cho Mobile */
+  @media (max-width: 768px) {
+      .gridTwo, .gridThree, .gridFour {
+          grid-template-columns: 1fr;
+      }
+
+      .spanTwo {
+        grid-column: span 1;
+      }
+  }
+  
+  /* --- Image Preview (không thay đổi) --- */
+  .fileInput {
+      padding: 10px;
+      background-color: var(--color-bg-light);
+      border: 1px dashed var(--color-border);
+  }
+  
+  /* ... Các styles Image Preview khác ... */
+
+  /* --- Submit Button & Button Group --- */
+  
+  /* Layout cho 2 nút LƯU/XÓA */
+  .buttonGroup {
+    display: flex; 
+    justify-content: space-between; 
+    gap: 15px; /* Thêm khoảng cách giữa 2 nút */
+    margin-top: 20px;
+  }
+
+  /* --- Submit Button --- */
+  .submitButton {
+    margin-top: 20px;
+    padding: 14px;
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  /* Nút Lưu (màu chính) */
+  .saveButton {
+    flex-grow: 1.5; /* Ưu tiên nút LƯU rộng hơn */
+    width: 65%; /* Tương đương inline style cũ */
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .saveButton:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+  }
+
+  /* Nút Xóa (màu phụ/nguy hiểm) */
+  .deleteButton {
+    flex-grow: 1;
+    width: 30%; /* Tương đương inline style cũ */
+    background-color: #ef4444; /* Red 500 */
+    color: white;
+  }
+
+  .deleteButton:hover:not(:disabled) {
+    background-color: #dc2626; /* Red 600 */
+    transform: translateY(-1px);
+  }
+  
+  .submitButton:disabled {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* --- Styles cho MESSAGE BOX --- */
+  .messageBox {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+
+  .messageSuccess {
+    background-color: var(--color-success-bg); 
+    color: var(--color-success-text);
+  }
+
+  .messageError {
+    background-color: var(--color-error-bg); 
+    color: var(--color-error-text);
+  }
+  
+  .messageInfo {
+    background-color: var(--color-info-bg); 
+    color: var(--color-info-text);
+  }
+
+  /* --- Styles cho DANH SÁCH LỊCH TRÌNH --- */
+  .itinerarySelectionContainer {
+    margin-bottom: 30px; 
+    border-top: 1px solid #e5e7eb; 
+    padding-top: 20px;
+  }
+
+  .itineraryListTitle {
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    margin-bottom: 15px; 
+    color: #374151;
+  }
+  
+  .itineraryList {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 10px;
+  }
+
+  .itineraryItem {
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .itineraryItem:hover {
+    background-color: #f9fafb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .itineraryItemSelected {
+    border: 2px solid #2563eb;
+    background-color: #eff6ff;
+  }
+  
+  .itemDayNumber {
+    font-weight: bold; 
+    color: #1e40af; /* Blue 800 */
+  }
+
+  .itemItinId {
+    font-size: 12px; 
+    color: #6b7280; 
+    margin-bottom: 5px;
+  }
+  
+  .itemTitle {
+    font-size: 14px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+  }
+
+  /* Responsive cho layout nút nhấn */
+  @media (max-width: 600px) {
+    .buttonGroup {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .saveButton, .deleteButton {
+        width: 100%;
+        flex-grow: 1; /* Cân bằng lại khi xếp chồng */
+    }
+  }
+
+  /* Định nghĩa màu */
+.formContainer {
+    /* ... các biến màu khác ... */
+    --color-error-bg: #fee2e2; /* Màu nền đỏ nhạt */
+    --color-error-text: #ef4444; /* Màu chữ đỏ */
+}
+
+/* Style chung cho Message Box */
+.messageBox {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+/* Style cụ thể cho lỗi */
+.messageError {
+    background-color: var(--color-error-bg); 
+    color: var(--color-error-text);
+}
+
+.required {
+    color: #ef4444; /* Mã màu Đỏ */
+}
+
+.previewContainer {
+    /* Thiết lập bố cục cho container (ví dụ: grid hoặc flexbox) */
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu nhiều ảnh */
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.imageWrapper {
+    /* Thiết lập kích thước cố định cho mỗi khung ảnh */
+    width: 150px; /* Chiều rộng mong muốn, ví dụ: 150px */
+    height: 150px; /* Chiều cao mong muốn, ví dụ: 150px */
+    position: relative;
+    border: 1px solid #ccc;
+    overflow: hidden; /* Quan trọng để cắt bớt phần thừa nếu ảnh không vuông */
+}
+
+.imageWrapper img {
+    /* Đảm bảo hình ảnh lấp đầy khung wrapper */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Quan trọng: Đảm bảo ảnh được cắt (crop) và lấp đầy khung mà không bị méo */
+}
+
+.removeBtn {
+    /* CSS cho nút xóa (tùy chỉnh vị trí và kiểu dáng) */
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    /* ... các kiểu dáng khác ... */
+}

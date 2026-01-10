@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./tour-application-fe
+    container_name: tour_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./TourApplication
+    container_name: tour_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+      - redis
+      - postgres
+    environment:
+      SPRING_DATASOURCE_PRIMARY_URL: jdbc:mysql://mysqldb:3306/tour?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+      SPRING_DATASOURCE_PRIMARY_USERNAME: root
+      SPRING_DATASOURCE_PRIMARY_PASSWORD: 123
+
+      SPRING_DATASOURCE_SECONDARY_URL: jdbc:postgresql://postgres:5432/vector_db
+      SPRING_DATASOURCE_SECONDARY_USERNAME: postgres
+      SPRING_DATASOURCE_SECONDARY_PASSWORD: postgres123
+
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_CACHE_CACHE_NAMES: tour_list,categories,tours
+      SPRING_CACHE_TYPE: redis
+
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    networks:
+      - tour_network
+
+  mysqldb:
+    image: mysql:8.0
+    container_name: tour_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: tour
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - tour_network
+
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: tour_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: vector_db
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - tour_network
+
+  redis:
+    image: redis:latest
+    container_name: tour_redis
+    ports:
+      - "6380:6379"
+    networks:
+      - tour_network
+
+volumes:
+  postgres_data:
+  mysql_data:
+
+networks:
+  tour_network:

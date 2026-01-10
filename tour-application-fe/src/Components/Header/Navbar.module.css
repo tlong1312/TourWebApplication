@@ -1,0 +1,82 @@
+/* Navbar.module.css */
+
+/* Định nghĩa màu sắc hiện đại */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95); /* Nền trắng mờ */
+  height: 70px; /* Tăng chiều cao một chút cho thoáng */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  
+  /* Hiệu ứng bóng đổ nhẹ và kính mờ */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #f1f5f9;
+  
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Logo Brand */
+.brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #334155; /* Màu xám đậm sang trọng */
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #2563eb, #db2777); /* Gradient xanh -> hồng */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Menu container */
+.navMenu {
+  display: flex;
+  list-style: none;
+  gap: 0.8rem; /* Khoảng cách giữa các nút */
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+}
+
+/* Link Style */
+.navLink {
+  text-decoration: none;
+  color: #64748b; /* Màu chữ xám trung tính */
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px; /* Bo tròn dạng viên thuốc */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effect */
+.navLink:hover {
+  background-color: #f1f5f9;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Active State (Khi đang chọn) */
+.active {
+  background-color: #eff6ff; /* Nền xanh rất nhạt */
+  color: #2563eb;            /* Chữ màu xanh đậm */
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .navMenu {
+    display: none; 
+  }
+  .navbar {
+    padding: 0 1.5rem;
+  }
+}
