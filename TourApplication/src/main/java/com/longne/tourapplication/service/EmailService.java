@@ -25,7 +25,7 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${spring.mail.username}")
+    @Value("${app.email.from}")
     private String fromEmail;
 
     @Value("${app.name:Tour Application}")

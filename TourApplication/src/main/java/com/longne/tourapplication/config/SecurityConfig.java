@@ -54,7 +54,7 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+                        config.setAllowedOrigins(Collections.singletonList("http://157.230.46.199:5173"));
                         config.setAllowedMethods(Collections.singletonList("*"));
                         config.setAllowCredentials(true);
                         config.setAllowedHeaders(Collections.singletonList("*"));
@@ -114,7 +114,7 @@ public class SecurityConfig {
                 String token = tokenService.generateToken(authentication);
                 String refreshToken = tokenService.generateRefreshToken(authentication);
 
-                response.sendRedirect("http://localhost:8080/oauth2/redirect?token=" + token + "&refresh_token=" + refreshToken);
+                response.sendRedirect("http://157.230.46.199:8080/oauth2/redirect?token=" + token + "&refresh_token=" + refreshToken);
             }catch(Exception e){
                 System.err.println("Error in Success Handler: " + e.getMessage());
                 e.printStackTrace();

@@ -149,7 +149,7 @@ public class TourVectorService {
         metadata.put("price", tour.getAdultPrice().toString());
         metadata.put("duration", tour.getDuration().toString());
 
-        String frontendUrl = "http://localhost:5173/tours/" + tour.getId();
+        String frontendUrl = "http://157.230.46.199:5173/tours/" + tour.getId();
         metadata.put("url", frontendUrl);
 
         String imageUrl = "";

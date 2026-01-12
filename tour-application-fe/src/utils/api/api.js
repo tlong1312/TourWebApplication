@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken, clearToken } from "./tokenService";
 
-const API_URL = "http://localhost:8080"; 
+const API_URL = "http://157.230.46.199:8080"; 
 
 // Tạo instance axios
 const api = axios.create({
