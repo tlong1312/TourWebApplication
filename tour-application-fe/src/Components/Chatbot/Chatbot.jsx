@@ -36,8 +36,8 @@ export default function Chatbot() {
 
       if (url.match(/\.(jpg|jpeg|png|gif|webp)/i)) {
         parts.push({ type: 'image', url });
-      } else if (url.includes('157.230.46.199:5173')) {
-        const path = url.replace(/https?:\/\/157.230.46.199:5173/, '');
+      } else if (url.includes('152.42.188.218:5173')) {
+        const path = url.replace(/https?:\/\/152.42.188.218:5173/, '');
         parts.push({ type: 'internalLink', path, displayText: '👉 Xem chi tiết tour' });
       } else {
         parts.push({ type: 'externalLink', url });

@@ -6,19 +6,31 @@ services:
     container_name: tour_frontend
     ports:
       - "5173:80"
+    restart: unless-stopped
     depends_on:
       - backend
+    networks:
+      - tour_network
+    deploy:
+      resources:
+        limits:
+          memory: 150M
 
   backend:
     build: ./TourApplication
     container_name: tour_backend
     ports:
       - "8080:8080"
+    restart: unless-stopped
     depends_on:
       - mysqldb
       - redis
       - postgres
     environment:
+      # --- CẤU HÌNH JAVA HEAP (Đã sửa lỗi cú pháp) ---
+      JAVA_TOOL_OPTIONS: "-Xmx512m -Xms256m"
+      
+      # Database Config
       SPRING_DATASOURCE_PRIMARY_URL: jdbc:mysql://mysqldb:3306/tour?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
       SPRING_DATASOURCE_PRIMARY_USERNAME: root
       SPRING_DATASOURCE_PRIMARY_PASSWORD: 123
@@ -31,15 +43,22 @@ services:
       SPRING_CACHE_CACHE_NAMES: tour_list,categories,tours
       SPRING_CACHE_TYPE: redis
 
+      # API Keys (Điền trực tiếp hoặc lấy từ biến môi trường)
       DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
       GEMINI_API_KEY: ${GEMINI_API_KEY}
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
     networks:
       - tour_network
+    deploy:
+      resources:
+        limits:
+          memory: 700M
 
   mysqldb:
     image: mysql:8.0
     container_name: tour_mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --innodb-buffer-pool-size=256M
     environment:
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: tour
@@ -49,6 +68,10 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - tour_network
+    deploy:
+      resources:
+        limits:
+          memory: 450M
 
   postgres:
     image: ankane/pgvector:latest
@@ -65,14 +88,24 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - tour_network
+    deploy:
+      resources:
+        limits:
+          memory: 350M
 
   redis:
     image: redis:latest
     container_name: tour_redis
+    restart: unless-stopped
+    command: ["redis-server", "--maxmemory", "100mb", "--maxmemory-policy", "allkeys-lru"]
     ports:
       - "6380:6379"
     networks:
       - tour_network
+    deploy:
+      resources:
+        limits:
+          memory: 150M
 
 volumes:
   postgres_data:
@@ -80,3 +113,4 @@ volumes:
 
 networks:
   tour_network:
+    driver: bridge

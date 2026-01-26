@@ -43,7 +43,7 @@ public class BookingController {
                 .map(e -> e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
                 .collect(Collectors.joining("&"));
 
-        String frontendUrl = "http://157.230.46.199:5173/vnpay-return?" + queryString;
+        String frontendUrl = "http://152.42.188.218:5173/vnpay-return?" + queryString;
         response.sendRedirect(frontendUrl);
     }
 

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TourToolService {
     private final TourRepository tourRepository;
-    private static final String FRONTEND_BASE_URL = "http://157.230.46.199:5173/tours/";
+    private static final String FRONTEND_BASE_URL = "http://152.42.188.218:5173/tours/";
 
     private String removeAccent(String s) {
         if (s == null) return "";
