@@ -5,6 +5,7 @@ import com.longne.tourapplication.repository.TourRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TourToolService {
     private final TourRepository tourRepository;
-    private static final String FRONTEND_BASE_URL = "http://152.42.188.218:5173/tours/";
+    @Value("${app.frontend.url}")
+    private String frontendBaseUrl;
 
     private String removeAccent(String s) {
         if (s == null) return "";
@@ -122,7 +124,10 @@ public class TourToolService {
                 }
 
                 result.append("   👉 [BẤM ĐỂ XEM CHI TIẾT](")
-                        .append(FRONTEND_BASE_URL).append(tour.getId()).append(")\n\n");
+                        .append(frontendBaseUrl)
+                        .append("/tours/")
+                        .append(tour.getId())
+                        .append(")\n\n");
             }
 
             log.info("✅ [TOOL] Found {} tours", filtered.size());

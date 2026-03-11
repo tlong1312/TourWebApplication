@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { logout, getToken } from "../../utils/api/tokenService";
 import { FiUser, FiLogOut, FiMenu, FiX } from "react-icons/fi";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,9 +9,9 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const menuRef = useRef(null);
-
-  const token = getToken();
-  const isLoggedIn = !!token;
+  const { user, logoutContext } = useAuth();
+  
+  const isLoggedIn = !!user;
   const isHomePage = location.pathname === "/";
 
   // Handle scroll for transparent header
@@ -33,8 +33,8 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logoutContext();
     navigate("/login");
     setIsMenuOpen(false);
   };
@@ -71,7 +71,7 @@ export default function Header() {
                   className="flex items-center gap-2 font-medium hover:text-primary transition-colors"
                 >
                   <FiUser size={20} />
-                  <span>Tài khoản</span>
+                  <span>{user?.username || "Tài khoản"}</span>
                 </button>
                 
                 {isMenuOpen && (

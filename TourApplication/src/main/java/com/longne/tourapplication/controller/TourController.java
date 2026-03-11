@@ -88,14 +88,14 @@ public class TourController {
 
     @GetMapping("/search")
     public ResponseEntity<PageResponse<TourResponse>> searchTours(
-            @RequestParam(required = false) String keyword,          // Tìm theo tên/mô tả
-            @RequestParam(required = false) Long categoryId,         // Lọc theo danh mục
-            @RequestParam(required = false) BigDecimal minPrice,     // Giá tối thiểu
-            @RequestParam(required = false) BigDecimal maxPrice,     // Giá tối đa
-            @RequestParam(required = false) Integer minDuration,     // Số ngày tối thiểu
-            @RequestParam(required = false) Integer maxDuration,     // Số ngày tối đa
-            @RequestParam(required = false) LocalDate startDateFrom, // Khởi hành từ
-            @RequestParam(required = false) LocalDate startDateTo,   // Khởi hành đến
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false) Integer minDuration,
+            @RequestParam(required = false) Integer maxDuration,
+            @RequestParam(required = false) LocalDate startDateFrom,
+            @RequestParam(required = false) LocalDate startDateTo,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "12") int size,
             @RequestParam(defaultValue = "id") String sortBy,

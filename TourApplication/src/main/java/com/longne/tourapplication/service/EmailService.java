@@ -49,6 +49,7 @@ public class EmailService {
             log.info("Đã gửi email xác nhận booking: {}", booking.getBookingCode());
         } catch (Exception e) {
             log.error("Lỗi gửi email xác nhận booking {}: {}", booking.getBookingCode(), e.getMessage(), e);
+            throw new RuntimeException("Lỗi khi gửi email qua SendGrid", e);
         }
     }
 
@@ -67,6 +68,7 @@ public class EmailService {
             log.info("Đã gửi email thanh toán thành công: {}", booking.getBookingCode());
         } catch (Exception e) {
             log.error("Lỗi gửi email thanh toán {}: {}", booking.getBookingCode(), e.getMessage(), e);
+            throw new RuntimeException("Lỗi khi gửi email qua SendGrid", e);
         }
     }
 
@@ -85,6 +87,7 @@ public class EmailService {
             log.info("Đã gửi email thanh toán thất bại: {}", booking.getBookingCode());
         } catch (Exception e) {
             log.error("Lỗi gửi email thanh toán thất bại {}: {}", booking.getBookingCode(), e.getMessage(), e);
+            throw new RuntimeException("Lỗi khi gửi email qua SendGrid", e);
         }
     }
 

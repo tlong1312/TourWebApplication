@@ -31,7 +31,7 @@ public interface TourRepository extends JpaRepository<Tour, Long>, JpaSpecificat
 
     @Query(value = """
         SELECT t.* 
-        FROM tours t
+        FROM tour t
         LEFT JOIN bookings b ON b.tour_id = t.id 
             AND b.status IN ('CONFIRMED', 'COMPLETED')
         WHERE t.status = 'ACTIVE'
@@ -43,7 +43,7 @@ public interface TourRepository extends JpaRepository<Tour, Long>, JpaSpecificat
 
     @Query(value = """
         SELECT t.*, COUNT(b.id) as booking_count
-        FROM tours t
+        FROM tour t
         LEFT JOIN bookings b ON b.tour_id = t.id
         GROUP BY t.id
         ORDER BY booking_count DESC

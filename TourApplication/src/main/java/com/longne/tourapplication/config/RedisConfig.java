@@ -22,10 +22,6 @@ import java.time.Duration;
 @EnableCaching
 public class RedisConfig {
 
-    /**
-     * Hàm này tạo ra cấu hình Cache chuẩn, tích hợp sẵn Mapper thông minh.
-     * Chúng ta viết gộp vào đây để đảm bảo Spring không dùng nhầm cái mặc định.
-     */
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
         // 1. Tạo Mapper riêng tư (Private) cho Redis

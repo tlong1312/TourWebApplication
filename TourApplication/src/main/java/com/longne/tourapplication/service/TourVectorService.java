@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TourVectorService {
 
+    @Value("${app.frontend.url}")
+    private String frontendUrl;
     public final TourRepository tourRepository;
     public final VectorStore vectorStore;
 
     @EventListener(ApplicationReadyEvent.class)
-    @Transactional(readOnly = true, transactionManager = "primaryTransactionManager")
+    @Transactional
     public void initializeVectorStore() {
         log.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         log.info("🚀 Initializing Vector Store...");
@@ -149,8 +152,8 @@ public class TourVectorService {
         metadata.put("price", tour.getAdultPrice().toString());
         metadata.put("duration", tour.getDuration().toString());
 
-        String frontendUrl = "http://152.42.188.218:5173/tours/" + tour.getId();
-        metadata.put("url", frontendUrl);
+        String link = frontendUrl + "/tours/" + tour.getId();
+        metadata.put("url", link);
 
         String imageUrl = "";
         if(tour.getImages() != null && !tour.getImages().isEmpty()){

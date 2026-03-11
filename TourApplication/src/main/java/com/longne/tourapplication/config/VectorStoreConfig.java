@@ -14,15 +14,9 @@ import javax.sql.DataSource;
 @Configuration
 public class VectorStoreConfig {
 
-    @Bean(name = "vectorJdbcTemplate")
-    @Qualifier("vectorJdbcTemplate")
-    public JdbcTemplate vectorJdbcTemplate(@Qualifier("secondaryDataSource") DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
 
-    @Bean(name = "vectorStore")
-    @Primary
-    public VectorStore vectorStore(@Qualifier("vectorJdbcTemplate") JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
+    @Bean
+    public VectorStore vectorStore(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
         return PgVectorStore.builder(jdbcTemplate, embeddingModel)
                 .dimensions(768)
                 .distanceType(PgVectorStore.PgDistanceType.COSINE_DISTANCE)

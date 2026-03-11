@@ -4,6 +4,7 @@ import api from "../../utils/api/api";
 import { saveToken, getUserRole } from "../../utils/api/tokenService";
 import { FiMail, FiLock, FiAlertCircle, FiCheckCircle, FiEye, FiEyeOff } from "react-icons/fi";
 import TermsOfService from "./TermsOfService";
+import { useAuth } from "../../contexts/AuthContext";
 
 const GOOGLE_CLIENT_ID = "963385142006-q9rq41egr2tnp5vjrmbl8cqpj9jgeqca.apps.googleusercontent.com";
 
@@ -19,6 +20,7 @@ export default function Login() {
 
   // Get success message from Register redirect
   const successMessage = location.state?.successMessage;
+  const { loginContext } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,9 +38,9 @@ export default function Login() {
       const data = res.data;
 
       if (data.access_token) {
-        saveToken(data.access_token);
-        const role = getUserRole();
+        loginContext(data.access_token);
 
+        const role = getUserRole();
         if (role === "ROLE_ADMIN") {
           navigate("/admin/tours");
         } else {

@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { changePassword } from "../../utils/api/TourApi";
-import { getUserInfo, logout } from "../../utils/api/tokenService";
 import { FiLock, FiEye, FiEyeOff, FiCheck, FiX, FiAlertCircle } from "react-icons/fi";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  
+  const { user, logoutContext} = useAuth();
+
   const [formData, setFormData] = useState({
     oldPassword: "",
     newPassword: "",
@@ -90,13 +91,12 @@ export default function ChangePassword() {
     setError(null);
 
     try {
-      const userInfo = getUserInfo();
-      if (!userInfo || !userInfo.id) {
+      if (!user || !user.id) {
         navigate("/login");
         return;
       }
 
-      await changePassword(userInfo.id, {
+      await changePassword(user.id, {
         oldPassword: formData.oldPassword,
         newPassword: formData.newPassword,
       });
@@ -104,11 +104,8 @@ export default function ChangePassword() {
       setSuccess(true);
       
       // Show success message for 2 seconds, then logout and redirect to login
-      setTimeout(() => {
-        logout();
-        navigate("/login", { 
-          state: { message: "Đổi mật khẩu thành công! Vui lòng đăng nhập lại." }
-        });
+      setTimeout(async () => {
+        await logoutContext();
       }, 2000);
       
     } catch (err) {

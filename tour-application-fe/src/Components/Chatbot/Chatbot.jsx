@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FiSend, FiMessageCircle, FiX } from 'react-icons/fi';
 
 export default function Chatbot() {
+  const currentOrigin = window.location.origin;
   const [messages, setMessages] = useState([
     { id: 1, text: 'Xin chào! Tôi là trợ lý AI của bạn. Hãy hỏi tôi về các tour du lịch nhé! 🌍✨', sender: 'bot' }
   ]);
@@ -36,8 +37,8 @@ export default function Chatbot() {
 
       if (url.match(/\.(jpg|jpeg|png|gif|webp)/i)) {
         parts.push({ type: 'image', url });
-      } else if (url.includes('152.42.188.218:5173')) {
-        const path = url.replace(/https?:\/\/152.42.188.218:5173/, '');
+      } else if (url.includes(currentOrigin)) {
+        const path = url.replace(currentOrigin, '');
         parts.push({ type: 'internalLink', path, displayText: '👉 Xem chi tiết tour' });
       } else {
         parts.push({ type: 'externalLink', url });

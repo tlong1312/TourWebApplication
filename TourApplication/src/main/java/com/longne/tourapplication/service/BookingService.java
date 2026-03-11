@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -40,9 +41,9 @@ public class BookingService {
     private final TourScheduleRepository tourScheduleRepository;
     private final UserRepository userRepository;
     private final VNPayService vnPayService;
-    private final EmailService emailService;
     private final TransactionRepository transactionRepository;
     private final RedissonClient redissonClient;
+    private final RabbitTemplate rabbitTemplate;
 
     public BookingResponse createBooking(BookingRequest request, HttpServletRequest httpRequest) {
         String lockKey = "bookingLock:" +request.getTourScheduleId();
@@ -127,7 +128,8 @@ public class BookingService {
                         .build();
                 transactionRepository.save(transaction);
 
-                emailService.sendBookingConfirmation(savedBooking);
+                String emailMessage = "CONFIRM|" + savedBooking.getBookingCode();
+                rabbitTemplate.convertAndSend("email_sending_queue", emailMessage);
 
                 String ipAddress = getClientIpAddress(httpRequest);
                 String paymentUrl = vnPayService.createPaymentUrl(
@@ -192,7 +194,8 @@ public class BookingService {
 
             log.info("Thanh toán thành công cho booking: {}", bookingCode);
 
-            emailService.sendPaymentSuccess(booking);
+            String emailMessage = "SUCCESS|" + bookingCode;
+            rabbitTemplate.convertAndSend("email_sending_queue", emailMessage);
         } else {
             booking.setPaymentStatus(Booking.PaymentStatus.FAILED);
             booking.setStatus(Booking.BookingStatus.CANCELLED);
@@ -202,7 +205,8 @@ public class BookingService {
                 transactionRepository.save(transaction);
             }
             log.warn("Thanh toán thất bại cho booking: {}, Response code: {}", bookingCode, responseCode);
-            emailService.sendPaymentFailed(booking);
+            String emailMessage = "FAILED|" + bookingCode;
+            rabbitTemplate.convertAndSend("email_sending_queue", emailMessage);
         }
         return mapToResponse(booking, null);
     }

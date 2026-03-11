@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 
-@SpringBootApplication(exclude = {
-        org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration.class
-})
+@SpringBootApplication
 @EnableCaching
 public class TourApplication {
 

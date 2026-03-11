@@ -147,7 +147,7 @@ public class AuthController {
         User user = userRepository.findByEmail(tokenEntity.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Authentication authentication = new UsernamePasswordAuthenticationToken(
-                user.getUsername(), null, user.getAuthorities()
+                user, null, user.getAuthorities()
         );
 
         String newAccessToken = tokenService.generateToken(authentication);

@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserById, updateUserInfo, uploadAvatar } from "../../utils/api/TourApi";
-import { getUserInfo } from "../../utils/api/tokenService";
 import { FiUser, FiPhone, FiMapPin, FiCamera, FiSave, FiX, FiUpload, FiCheck, FiAlertCircle } from "react-icons/fi";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function EditProfile() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const {user} = useAuth();
   
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -28,28 +29,27 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const tokenData = getUserInfo();
         
-        if (!tokenData || !tokenData.id) {
+        if (!user || !user.id) {
           console.log("No token data, redirecting to login");
           navigate("/login");
           return;
         }
         
-        setUserId(tokenData.id);
+        setUserId(user.id);
         
-        const response = await getUserById(tokenData.id);
-        const user = response.data;
+        const response = await getUserById(user.id);
+        const userData = response.data;
         setFormData({
-          fullName: user.fullName || "",
-          phoneNumber: user.phoneNumber || "",
-          district: user.district || "",
-          province: user.province || "",
+          fullName: userData.fullName || "",
+          phoneNumber: userData.phoneNumber || "",
+          district: userData.district || "",
+          province: userData.province || "",
         });
         
-        if (user.avatar) {
-          setAvatarPreview(user.avatar);
-        } else if (user.fullName) {
+        if (userData.avatar) {
+          setAvatarPreview(userData.avatar);
+        } else if (userData.fullName) {
           setAvatarPreview(`https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}&background=0D8ABC&color=fff&size=200`);
         }
         

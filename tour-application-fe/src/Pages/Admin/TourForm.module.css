@@ -193,17 +193,20 @@
   .buttonGroup {
     display: flex; 
     justify-content: space-between; 
-    gap: 15px; /* Thêm khoảng cách giữa 2 nút */
+    gap: 15px;
     margin-top: 20px;
+    margin-bottom: 40px;
   }
 
   /* --- Submit Button --- */
   .submitButton {
+    display: block;
     margin-top: 20px;
+    margin-bottom: 40px;
     padding: 14px;
     width: 100%;
-    background-color: var(--color-primary);
-    color: white;
+    background-color: #4f46e5 !important;
+    color: #ffffff !important;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -211,18 +214,20 @@
     font-weight: 700;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: background-color 0.3s, transform 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
   }
-  
+
   /* Nút Lưu (màu chính) */
   .saveButton {
-    flex-grow: 1.5; /* Ưu tiên nút LƯU rộng hơn */
-    width: 65%; /* Tương đương inline style cũ */
-    background-color: var(--color-primary);
-    color: white;
+    flex-grow: 1.5;
+    width: 65%;
+    background-color: #4f46e5 !important;
+    color: #ffffff !important;
   }
 
   .saveButton:hover:not(:disabled) {
-    background-color: var(--color-primary-hover);
+    background-color: #4338ca !important;
     transform: translateY(-1px);
   }
 
@@ -239,9 +244,14 @@
     transform: translateY(-1px);
   }
   
+  .submitButton:hover:not(:disabled) {
+    background-color: #4338ca !important;
+    transform: translateY(-1px);
+  }
+
   .submitButton:disabled {
-    background-color: #e5e7eb;
-    color: #9ca3af;
+    background-color: #e5e7eb !important;
+    color: #9ca3af !important;
     cursor: not-allowed;
     transform: none;
   }

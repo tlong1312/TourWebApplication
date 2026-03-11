@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserInfo, logout } from "../../utils/api/tokenService";
 import { getUserById } from "../../utils/api/TourApi";
+import { useAuth } from "../../contexts/AuthContext";
 import { 
   FiUser, FiEdit3, FiLock, FiClock, FiLogOut, 
   FiMenu, FiX, FiMail, FiPhone, FiMapPin, FiCalendar
 } from "react-icons/fi";
 
+
 export default function ProfilePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const {user, logoutContext} = useAuth();
   const [userData, setUserData] = useState({
     district: "",
     email: "",
@@ -25,9 +27,9 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const tokenData = getUserInfo();
-        if (tokenData && tokenData.id) {
-          const response = await getUserById(tokenData.id);
+        
+        if (user && user.id) {
+          const response = await getUserById(user.id);
           const data = response.data;
 
           setUserData({
@@ -54,11 +56,10 @@ export default function ProfilePage() {
     };
 
     fetchUserData();
-  }, [navigate]);
+  }, [navigate, user]);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
+  const handleLogout = async () => {
+    await logoutContext();
   };
 
   if (loading) {

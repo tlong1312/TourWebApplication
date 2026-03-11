@@ -15,7 +15,7 @@ const initialState = {
   availableSeats: 10,
   startDate: "",
   endDate: "",
-  status: "Draft",
+  status: "active",
   featured: "No",
 
   adultPrice: "",
@@ -386,8 +386,9 @@ const AddTour = () => {
                 value={formData.status}
                 onChange={handleChange}
               >
-                <option value="Published">Kích hoạt</option>
-                <option value="Waiting">Chưa kích hoạt</option>
+                <option value="active">Kích hoạt</option>       
+                <option value="inactive">Chưa kích hoạt</option> 
+                <option value="draft">Nháp</option>
               </select>
             </div>
             <div className={styles.formGroup}>

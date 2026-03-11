@@ -5,6 +5,7 @@ import com.longne.tourapplication.service.BookingService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/bookings")
 @RequiredArgsConstructor
 public class BookingController {
+
+    @Value("${app.frontend.url}")
+    private String frontendUrl;
 
     private final BookingService bookingService;
 
@@ -43,8 +47,8 @@ public class BookingController {
                 .map(e -> e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
                 .collect(Collectors.joining("&"));
 
-        String frontendUrl = "http://152.42.188.218:5173/vnpay-return?" + queryString;
-        response.sendRedirect(frontendUrl);
+        String redirectUrl = frontendUrl + "/vnpay-return?" + queryString;
+        response.sendRedirect(redirectUrl);
     }
 
     @GetMapping("/my-bookings")

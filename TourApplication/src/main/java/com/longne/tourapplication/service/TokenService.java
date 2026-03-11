@@ -29,7 +29,7 @@ public class TokenService {
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.joining(",")))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 604800000))
+                .setExpiration(new Date(System.currentTimeMillis() + 900000))
                 .signWith(key).compact();
     }
 
