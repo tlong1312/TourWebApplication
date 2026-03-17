@@ -27,5 +27,5 @@ The repository is structured as a monorepo containing both frontend and backend 
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/TourWebApplication.git](https://github.com/your-username/TourWebApplication.git)
+   git clone https://github.com/tlong1312/TourWebApplication.git
    cd TourWebApplication
