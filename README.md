@@ -15,7 +15,7 @@ A full-stack tour booking platform integrated with an AI-powered RAG chatbot for
 
 ## Tech Stack
 
-* **Backend:** Java 17, Spring Boot 3, Spring Security (JWT), Spring AI, Spring Data JPA.
+* **Backend:** Java 21, Spring Boot 3, Spring Security (JWT), Spring AI, Spring Data JPA.
 * **Frontend:** ReactJS, Axios, Tailwind CSS.
 * **Database & Vector Store:** PostgreSQL, pgvector.
 * **Caching & Message Broker:** Redis, RabbitMQ.
