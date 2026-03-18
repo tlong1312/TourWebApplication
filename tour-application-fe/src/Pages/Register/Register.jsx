@@ -31,7 +31,7 @@ export default function Register({ onSuccess }) {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const res = await axios.get("http://provinces.open-api.vn/api/p/");
+        const res = await axios.get("https://provinces.open-api.vn/api/p/");
         setProvinces(res.data);
       } catch (err) {
         console.error("Lỗi lấy danh sách tỉnh/thành", err);
@@ -54,7 +54,7 @@ export default function Register({ onSuccess }) {
     }));
 
     try {
-      const res = await axios.get(`http://provinces.open-api.vn/api/p/${provinceCode}?depth=2`);
+      const res = await axios.get(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`);
       setDistricts(res.data.districts);
     } catch (err) {
       console.error("Lỗi lấy danh sách quận/huyện", err);

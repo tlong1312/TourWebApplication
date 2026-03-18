@@ -6,7 +6,7 @@ const protocol = window.location.protocol;
 
 const API_URL = (hostname === "localhost" || hostname === "127.0.0.1")
   ? "http://localhost:8080"
-  : `${protocol}//${hostname}:8080`;
+  : `${protocol}//${hostname}`;
 
 // Tạo instance axios
 const api = axios.create({
