@@ -39,8 +39,6 @@ public class TourService {
     private final CategoryRepository categoryRepository;
     private final TourScheduleRepository tourScheduleRepository;
     private final BookingRepository bookingRepository;
-
-    //CREATE
     @CacheEvict(value = "tour_list", allEntries = true)
     public TourResponse createTour(TourRequest tourRequest) {
 
@@ -53,8 +51,6 @@ public class TourService {
         Tour newTour = tourRepository.save(tour);
         return tourMapper.toTourResponse(newTour);
     }
-
-    //FIND
     @Transactional(readOnly = true)
     @Cacheable(value = "tour_detail", key = "#idTour")
     public TourResponse getTourById(Long idTour) {
@@ -75,8 +71,6 @@ public class TourService {
         Page<Tour> tourPage = tourRepository.findAll(pageable);
         return tourPage.map(tourMapper::toTourResponse);
     }
-
-    // UPDATE
     @Caching(evict = {
             @CacheEvict(value = "tour_detail", key = "#idTour"),
             @CacheEvict(value = "tour_list", allEntries = true)
@@ -84,8 +78,6 @@ public class TourService {
     public TourResponse updateTour(Long idTour, TourRequest tourRequest) {
         Tour existingTour = tourRepository.findById(idTour)
                 .orElseThrow(() -> new RuntimeException("Tour không tồn tại"));
-
-        // Validate category nếu có thay đổi
         if (!existingTour.getCategory().getId().equals(tourRequest.getCategoryId())) {
             Category category = categoryRepository.findById(tourRequest.getCategoryId())
                     .orElseThrow(() -> new RuntimeException("Category không tồn tại"));
@@ -100,8 +92,6 @@ public class TourService {
         Tour updatedTour = tourRepository.save(existingTour);
         return tourMapper.toTourResponse(updatedTour);
     }
-
-    // DELETE
     @Caching(evict = {
             @CacheEvict(value = "tour_detail", key = "#idTour"),
             @CacheEvict(value = "tour_list", allEntries = true)

@@ -24,8 +24,6 @@ const TourDetailAdmin = () => {
         const itineraryPromise = api.get(`/api/tour-itinerary/of_tour/${id}`);
         const schedulePromise = api.get(`/api/tour-schedules/tour/${id}/all`);
         const imagesPromise = api.get(`/api/tour-images/of_tour/${id}`);
-
-        // Chờ cả ba request hoàn thành
         const [tourInfoResponse, itineraryResponse, scheduleResponse, imagesResponse] =
           await Promise.all([
             tourInfoPromise,
@@ -33,8 +31,6 @@ const TourDetailAdmin = () => {
             schedulePromise,
             imagesPromise,
           ]);
-
-        // 4. Hợp nhất dữ liệu
         setTour({
           ...tourInfoResponse.data,
           itineraries: itineraryResponse.data,
@@ -44,7 +40,6 @@ const TourDetailAdmin = () => {
         console.log("Images data:", imagesResponse.data); // Thêm dòng này
       } catch (err) {
         console.error("Lỗi tải chi tiết tour:", err);
-        // Kiểm tra lỗi 404 hoặc các lỗi khác để đưa ra thông báo phù hợp
         if (err.response && err.response.status === 404) {
           setError("Không tìm thấy Tour với ID này.");
         } else {
@@ -68,16 +63,12 @@ const TourDetailAdmin = () => {
       return () => clearTimeout(timer);
     }
   }, [imageStatus]);
-
-  // Helper format tiền tệ
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
     }).format(amount);
   };
-
-  // Helper format ngày
   const formatDate = (dateString) => {
     if (!dateString) return "";
     return new Date(dateString).toLocaleDateString("vi-VN");
@@ -359,7 +350,6 @@ const TourDetailAdmin = () => {
                     await api.post("/api/tour-images/upload", formData, {
                       headers: { "Content-Type": "multipart/form-data" },
                     });
-                    // Reload images
                     const res = await api.get(`/api/tour-images/of_tour/${id}`);
                     setImages(res.data);
                     setImageStatus({ type: "success", message: "Thêm hình ảnh thành công!" });

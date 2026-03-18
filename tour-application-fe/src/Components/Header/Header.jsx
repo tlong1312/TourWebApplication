@@ -13,8 +13,6 @@ export default function Header() {
   
   const isLoggedIn = !!user;
   const isHomePage = location.pathname === "/";
-
-  // Handle scroll for transparent header
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -38,8 +36,6 @@ export default function Header() {
     navigate("/login");
     setIsMenuOpen(false);
   };
-
-  // Transparent on homepage, white on other pages
   const headerClass = isHomePage && !scrolled
     ? "bg-transparent text-white"
     : "bg-white text-gray-900 shadow-md";

@@ -39,8 +39,6 @@ public class TourRequest {
     private String featured;
 
     private List<MultipartFile> images;
-
-    // THÊM MỚI:
     @NotNull(message = "Giá người lớn không được để trống")
     @DecimalMin(value = "0.0", message = "Giá người lớn phải >= 0")
     private BigDecimal adultPrice;

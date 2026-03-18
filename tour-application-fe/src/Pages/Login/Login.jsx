@@ -17,8 +17,6 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const [showTerms, setShowTerms] = useState(false);
-
-  // Get success message from Register redirect
   const successMessage = location.state?.successMessage;
   const { loginContext } = useAuth();
 

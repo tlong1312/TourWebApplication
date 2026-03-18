@@ -117,10 +117,7 @@ export default function Register({ onSuccess }) {
       province: formData.provinceName,
       district: formData.districtName,
     });
-
-    // Check status code 200 or 201 = success
     if (res.status === 200 || res.status === 201) {
-      // Registration successful, redirect to login
       if (onSuccess) {
         onSuccess();
       } else {

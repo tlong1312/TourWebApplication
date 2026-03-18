@@ -19,8 +19,6 @@ const AddCategory = () => {
   const [success, setSuccess] = useState(null);
 
   const navigate = useNavigate();
-
-  // --- Xử lý thay đổi input (Text, Checkbox) ---
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const finalValue = type === "checkbox" ? checked : value;
@@ -30,8 +28,6 @@ const AddCategory = () => {
       [name]: finalValue,
     }));
   };
-
-  // --- Xử lý thay đổi file (Icon) ---
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedIcon(e.target.files[0]);
@@ -39,8 +35,6 @@ const AddCategory = () => {
       setSelectedIcon(null);
     }
   };
-
-  // --- Validate Form ---
   const validateForm = () => {
     if (!formData.name.trim()) {
       setError("Tên danh mục không được để trống");
@@ -61,10 +55,7 @@ const AddCategory = () => {
       setError("Mô tả không được vượt quá 500 ký tự");
       return false;
     }
-
-    // Validate file ảnh (Backend không bắt buộc nhưng Frontend nên check)
     if (selectedIcon && selectedIcon.size > 5 * 1024 * 1024) {
-      // 5MB
       setError("Dung lượng file không được vượt quá 5MB");
       return false;
     }
@@ -98,8 +89,6 @@ const AddCategory = () => {
     categoryData.append("name", formData.name.trim());
     categoryData.append("description", formData.description.trim());
     categoryData.append("isActive", formData.isActive);
-
-    // 4. private MultipartFile icon;
     if (selectedIcon) {
       categoryData.append("icon", selectedIcon);
     }
@@ -123,13 +112,11 @@ const AddCategory = () => {
 
       if (err.response) {
         const status = err.response.status;
-        // Lấy thông báo lỗi từ body (thường là message hoặc error)
         const serverMsg =
           err.response.data?.message || err.response.data?.error || "";
         if (status === 409) {
           errorMessage = serverMsg || "Tên danh mục đã tồn tại";
         }
-        // Bắt lỗi validation từ backend
         else if (serverMsg) {
           errorMessage = serverMsg;
         }

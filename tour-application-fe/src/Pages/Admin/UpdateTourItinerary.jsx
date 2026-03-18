@@ -177,8 +177,6 @@ const UpdateTourItinerary = () => {
       setLoading(false);
     }
   };
-
-  // Class cho Message box (chọn màu dựa trên type)
   const getMessageClass = () => {
     switch (message.type) {
       case "success":

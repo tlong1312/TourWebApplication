@@ -30,8 +30,6 @@ public class TourResponse implements Serializable {
         private List<TourImageResponse> images;
         private List<TourItineraryResponse> itineraries;
         private List<TourScheduleResponse> schedules;
-
-        // THÊM MỚI:
         private BigDecimal adultPrice;
         private BigDecimal childPrice;
         private BigDecimal infantPrice;

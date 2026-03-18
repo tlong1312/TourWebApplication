@@ -39,8 +39,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error) {
-        // Xử lý lỗi hoặc trả về trang đăng nhập
-        return "login"; // Tên view hoặc template của bạn
+        return "login"; 
     }
 
     @PostMapping("/register")
@@ -88,8 +87,6 @@ public class AuthController {
                     )
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            // Tạo JWT và refresh Token
             String accessToken = tokenService.generateToken(authentication);
             String refreshToken = tokenService.generateRefreshToken(authentication);
 

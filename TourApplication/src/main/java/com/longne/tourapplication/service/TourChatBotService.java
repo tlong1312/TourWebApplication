@@ -35,14 +35,10 @@ public class TourChatBotService {
         this.tourVectorService = tourVectorService;
         this.tourToolService = tourToolService;
         this.jdbcChatMemoryRepository = jdbcChatMemoryRepository;
-
-        // Setup ChatMemory
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
                 .chatMemoryRepository(jdbcChatMemoryRepository)
                 .maxMessages(10)
                 .build();
-
-        // Build ChatClient
         this.chatClient = builder
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .build();
@@ -65,14 +61,11 @@ public class TourChatBotService {
 
         String msg = request.getMessage().toLowerCase();
         List<String> resetKeywords = List.of(
-                // ✅ CHỈ GIỮ LẠI ĐỘNG TỪ (Hành động muốn tìm mới)
                 "tìm tour", "tìm kiếm", "muốn đi", "cần đi", "có tour",
                 "du lịch", "khám phá", "tham quan",
                 "đổi địa điểm", "chỗ khác",
                 "quốc tế", "nước ngoài", "nội địa", "trong nước"
         );
-
-        // Nếu câu chat chứa bất kỳ từ khóa nào ở trên -> Xóa bộ nhớ cũ ngay
         boolean isNewSearch = resetKeywords.stream().anyMatch(msg::contains);
 
         if (isNewSearch) {

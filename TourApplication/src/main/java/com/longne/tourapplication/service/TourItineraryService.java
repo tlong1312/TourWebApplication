@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-// (Nên tạo class exception này để trả về lỗi 404)
-// import com.longne.tourapplication.exception.ResourceNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +22,6 @@ public class TourItineraryService {
     private final TourItineraryMapper tourItineraryMapper;
 
     private final TourRepository tourRepository;
-
-    //CREATE
     public TourItineraryResponse createTourItinerary(TourItineraryRequest tourItineraryRequest) {
 
         Tour tour = tourRepository.findById(tourItineraryRequest.getTourId())
@@ -38,8 +34,6 @@ public class TourItineraryService {
         TourItinerary newTourItinerary = tourItineraryRepository.save(tourItinerary);
         return tourItineraryMapper.toTourResponse(newTourItinerary);
     }
-
-    //FIND
     public TourItineraryResponse getTourItineraryById(Long idTourItinerary) {
         return tourItineraryRepository.findById(idTourItinerary)
                 .map(tourItineraryMapper::toTourResponse)
@@ -50,8 +44,6 @@ public class TourItineraryService {
         List<TourItinerary> tourItineraries = tourItineraryRepository.findAll();
         return tourItineraryMapper.toDtoList(tourItineraries);
     }
-
-    // Lấy danh sách TourItinerary theo Tour ID
     public List<TourItineraryResponse> getTourItinerariesByTourId(Long tourId) {
         Tour tour = tourRepository.findById(tourId)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Tour với ID: " + tourId));
@@ -59,8 +51,6 @@ public class TourItineraryService {
         List<TourItinerary> tourItineraries = tourItineraryRepository.findByTour(tour);
         return tourItineraryMapper.toDtoList(tourItineraries);
     }
-
-    // UPDATE
     public TourItineraryResponse updateTourItinerary(Long idTourItinerary, TourItineraryRequest tourItineraryRequest) {
         TourItinerary existingTourItinerary = tourItineraryRepository.findById(idTourItinerary)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Itinerary với ID: " + idTourItinerary));
@@ -75,8 +65,6 @@ public class TourItineraryService {
         TourItinerary updatedTourItinerary = tourItineraryRepository.save(existingTourItinerary);
         return tourItineraryMapper.toTourResponse(updatedTourItinerary);
     }
-
-    // DELETE
     public void deleteTourItinerary(Long idTourItinerary) {
         if (!tourItineraryRepository.existsById(idTourItinerary)) {
             throw new RuntimeException("Không tìm thấy Itinerary với ID: " + idTourItinerary + " để xóa");

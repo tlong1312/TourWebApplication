@@ -35,8 +35,6 @@ const AdminPage = () => {
     ) {
       try {
         await api.delete(`/api/users/${id}`);
-
-        //Lọc bỏ tour vừa xóa
         setAdmin((prevAdmin) => prevAdmin.filter((admin) => admin.id !== id));
 
         alert("Đã xóa người quản trị thành công!");

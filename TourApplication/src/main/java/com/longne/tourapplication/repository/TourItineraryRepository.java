@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface TourItineraryRepository extends JpaRepository<TourItinerary, Long> {
     List<TourItinerary> findByTour(Tour tour);
-//    List<TourItinerary> findByTourId(Long tourId);
     Long id(Long id);
 }

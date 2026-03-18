@@ -103,8 +103,6 @@ public class TourVectorService {
     }
 
     private String generateUuidFromTourId(Long tourId) {
-        // Create deterministic UUID from tour ID
-        // Format: "00000000-0000-0000-0000-{tourId padded}"
         String paddedId = String.format("%012d", tourId);
         return String.format("00000000-0000-0000-0000-%s", paddedId);
     }

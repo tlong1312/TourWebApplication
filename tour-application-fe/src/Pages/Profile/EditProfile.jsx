@@ -59,7 +59,6 @@ export default function EditProfile() {
         console.error('Error response:', err.response); // Debug
         
         if (err.response?.status === 401 || err.response?.status === 403) {
-          // Token hết hạn hoặc không hợp lệ
           setError("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.");
           setTimeout(() => navigate("/login"), 2000);
         } else {
@@ -85,21 +84,16 @@ export default function EditProfile() {
   const handleAvatarChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Validate file type
       if (!file.type.startsWith('image/')) {
         setError("Vui lòng chọn file ảnh");
         return;
       }
-      
-      // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         setError("Kích thước ảnh không được vượt quá 5MB");
         return;
       }
       
       setAvatarFile(file);
-      
-      // Preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setAvatarPreview(reader.result);
@@ -164,8 +158,6 @@ export default function EditProfile() {
       </div>
     );
   }
-
-  // Show error page if failed to load
   if (error && !userId) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-20">

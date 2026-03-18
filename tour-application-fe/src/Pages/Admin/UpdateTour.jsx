@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../../utils/api/api";
 import styles from "./TourForm.module.css";
 import Alert from "../../Components/Alert/Alert";
-// import { format } from "date-fns"; // Thư viện giúp format ngày tháng
 
 const initialTourData = {
   categoryId: "",
@@ -24,7 +23,6 @@ const initialTourData = {
   singleRoomSurcharge: 0,
   departurePoint: "",
   returnPoint: "",
-  // Không cần images ở đây vì sẽ xử lý riêng
 };
 
 const UpdateTour = () => {
@@ -122,10 +120,7 @@ const UpdateTour = () => {
     setLoading(true);
 
     const tourData = new FormData();
-
-    // 1. Gửi các trường dữ liệu Text/Number/Date
     for (const key in formData) {
-      // Không gửi các trường không phải String/Number qua FormData nếu là null/empty
       if (
         formData[key] !== null &&
         formData[key] !== undefined &&

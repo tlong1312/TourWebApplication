@@ -24,22 +24,15 @@ public class RedisConfig {
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
-        // 1. Tạo Mapper riêng tư (Private) cho Redis
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-        // Kích hoạt Type Info (Lưu tên Class vào JSON)
         BasicPolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
                 .allowIfBaseType(Object.class)
                 .build();
         mapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
-
-        // 2. Tạo Serializer từ Mapper trên
         GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(mapper);
-
-        // 3. Trả về cấu hình Cache đã gắn Serializer
         return RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofHours(1))
                 .disableCachingNullValues()
@@ -49,10 +42,7 @@ public class RedisConfig {
 
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-        // Chúng ta phải gọi lại logic tạo Serializer ở trên để áp dụng cho các cache con
-        // (Hơi lặp lại xíu nhưng chắc chắn chạy)
         return builder -> {
-            // Copy logic tạo mapper/serializer y hệt ở trên để đảm bảo đồng bộ
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
             mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -62,8 +52,6 @@ public class RedisConfig {
                     .build();
             mapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
             GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(mapper);
-
-            // Cấu hình cho từng cache name cụ thể
             builder
                     .withCacheConfiguration("tour_detail",
                             RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofDays(1))

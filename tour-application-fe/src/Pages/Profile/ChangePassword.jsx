@@ -29,8 +29,6 @@ export default function ChangePassword() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setError(null);
-
-    // Calculate password strength for new password
     if (name === "newPassword") {
       let strength = 0;
       if (value.length >= 8) strength++;
@@ -102,8 +100,6 @@ export default function ChangePassword() {
       });
 
       setSuccess(true);
-      
-      // Show success message for 2 seconds, then logout and redirect to login
       setTimeout(async () => {
         await logoutContext();
       }, 2000);

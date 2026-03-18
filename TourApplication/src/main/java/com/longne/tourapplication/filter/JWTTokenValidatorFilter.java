@@ -72,7 +72,6 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
                 path.startsWith("/oauth2/") ||
                 path.startsWith("/login/oauth2/") ||
                 path.equals("/error") ||
-                // GET tour/category/images không cần token
                 (method.equals("GET") && (
                         path.startsWith("/api/tour") ||
                                 path.startsWith("/api/categories") ||

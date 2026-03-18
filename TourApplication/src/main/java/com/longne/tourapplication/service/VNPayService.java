@@ -38,12 +38,8 @@ public class VNPayService {
             vnpParams.put("vnp_Locale", "vn");
             vnpParams.put("vnp_ReturnUrl", vnPayConfig.getReturnUrl());
             vnpParams.put("vnp_IpAddr", ipAddress);
-
-            // Create date in format: yyyyMMddHHmmss
             String vnpCreateDate = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
             vnpParams.put("vnp_CreateDate", vnpCreateDate);
-
-            // Build query string (sorted alphabetically, URL encoded)
             StringBuilder query = new StringBuilder();
             for (Map.Entry<String, String> entry : vnpParams.entrySet()) {
                 if (query.length() > 0) {
@@ -53,12 +49,8 @@ public class VNPayService {
                 query.append('=');
                 query.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
             }
-
-            // Generate secure hash
             String signData = query.toString();
             String vnpSecureHash = hmacSHA512(vnPayConfig.getHashSecret(), signData);
-
-            // Append secure hash at the end
             String paymentUrl = vnPayConfig.getVnpUrl() + "?" + query.toString() +
                     "&vnp_SecureHash=" + vnpSecureHash;
 
@@ -77,11 +69,7 @@ public class VNPayService {
             String vnpSecureHash = params.get("vnp_SecureHash");
             params.remove("vnp_SecureHash");
             params.remove("vnp_SecureHashType");
-
-            // Sort parameters alphabetically
             Map<String, String> sortedParams = new TreeMap<>(params);
-
-            // Build sign data
             StringBuilder signData = new StringBuilder();
             for (Map.Entry<String, String> entry : sortedParams.entrySet()) {
                 if (entry.getValue() != null && !entry.getValue().isEmpty()) {

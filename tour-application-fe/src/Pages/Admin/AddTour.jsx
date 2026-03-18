@@ -43,8 +43,6 @@ const AddTour = () => {
         const response = await api.get("/api/categories");
         const data = response.data;
         setCategories(data);
-
-        // Tự động chọn category đầu tiên nếu có
         if (data && data.length > 0) {
           setFormData((prev) => ({ ...prev, categoryId: data[0].id }));
         }
@@ -136,13 +134,9 @@ const AddTour = () => {
       });
 
       setSuccess("Thêm tour thành công!");
-
-      // Reset Form
       setFormData(initialState);
       setSelectedFiles([]);
       e.target.querySelector('input[type="file"]').value = "";
-
-      // Reset lại category mặc định
       if (categories.length > 0) {
         setFormData((prev) => ({ ...prev, categoryId: categories[0].id }));
       }

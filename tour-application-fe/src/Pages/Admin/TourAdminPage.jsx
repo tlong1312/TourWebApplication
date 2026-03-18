@@ -27,15 +27,11 @@ const TourAdminPage = () => {
       const response = await api.get("/api/tour");
       const fetchedTours = response.data;
       setTours(fetchedTours);
-
-      // Tải thống kê cho tất cả tours (chạy song song để tối ưu tốc độ)
       const statsPromises = fetchedTours.map((tour) =>
         fetchBookingStats(tour.id).then((stats) => ({ id: tour.id, stats }))
       );
 
       const results = await Promise.all(statsPromises);
-
-      // Tạo map { tourId: statsObject }
       const newBookingStats = results.reduce((acc, current) => {
         acc[current.id] = current.stats;
         return acc;

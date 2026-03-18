@@ -44,8 +44,6 @@ public class TourMapper {
         response.setFeatured(tour.getFeatured());
         response.setCreatedAt(tour.getCreatedAt());
         response.setUpdatedAt(tour.getUpdatedAt());
-
-        // THÊM MỚI:
         response.setAdultPrice(tour.getAdultPrice());
         response.setChildPrice(tour.getChildPrice());
         response.setInfantPrice(tour.getInfantPrice());
@@ -93,8 +91,6 @@ public class TourMapper {
         tour.setFeatured(request.getFeatured());
         tour.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         tour.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-
-        // THÊM MỚI:
         tour.setAdultPrice(request.getAdultPrice() != null ? request.getAdultPrice() : BigDecimal.ZERO);
         tour.setChildPrice(request.getChildPrice() != null ? request.getChildPrice() : BigDecimal.ZERO);
         tour.setInfantPrice(request.getInfantPrice() != null ? request.getInfantPrice() : BigDecimal.ZERO);
@@ -122,8 +118,6 @@ public class TourMapper {
         tour.setStatus(request.getStatus());
         tour.setFeatured(request.getFeatured());
         tour.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-
-        // THÊM MỚI:
         if (request.getAdultPrice() != null) {
             tour.setAdultPrice(request.getAdultPrice());
         }

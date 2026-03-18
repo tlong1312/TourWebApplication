@@ -96,7 +96,6 @@ const AddTourSchedule = () => {
         err.response?.data?.error ||
         err.response?.data?.message ||
         "Lỗi không xác định từ Server. Vui lòng kiểm tra Console (F12).";
-      // Hiển thị thông báo lỗi
       setMessage({
         type: "error",
         text: serverErrorMessage, // Hiển thị nguyên văn thông báo lỗi từ server

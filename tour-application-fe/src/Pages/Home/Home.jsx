@@ -19,8 +19,6 @@ export default function Home() {
       try {
         const toursRes = await getTours();
         setTours(toursRes.data.content || toursRes.data);
-        
-        // Create images map
         const map = {};
         (toursRes.data.content || toursRes.data).forEach(tour => {
           const primaryImg = tour.images?.find(img => img.isPrimary);

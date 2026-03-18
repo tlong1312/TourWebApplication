@@ -24,8 +24,6 @@ export default function Tourpage() {
     const [totalPages, setTotalPages] = useState(0);
     const [totalElements, setTotalElements] = useState(0);
     const pageSize = 12;
-
-    // Fetch images
     useEffect(() => {
         const fetchImages = async () => {
             try {

@@ -78,8 +78,6 @@ const AddAdmin = () => {
       setTimeout(() => {
         navigate("/admin/users");
       }, 1500);
-
-      // Reset Form
       setFormData(initialState);
       window.scrollTo(0, 0);
     } catch (err) {

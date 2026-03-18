@@ -22,8 +22,6 @@ export default function BookingTour() {
   const [passengerCounts, setPassengerCounts] = useState({ numAdults: 1, numChildren: 0, numInfants: 0, numSingleRooms: 0 });
   const [participants, setParticipants] = useState([{ id: 1, fullName: "", dateOfBirth: "", gender: "MALE", participantType: "ADULT", roomType: "DOUBLE" }]);
   const [bookingDetails, setBookingDetails] = useState({ customerNotes: "", paymentMethod: "vnpay" });
-
-  // Auto-generate participants
   useEffect(() => {
     const total = passengerCounts.numAdults + passengerCounts.numChildren + passengerCounts.numInfants;
     if (total === participants.length) return;
@@ -45,8 +43,6 @@ export default function BookingTour() {
     });
     setParticipants(newParticipants);
   }, [passengerCounts]);
-
-  // Sync first participant
   useEffect(() => {
     if (participants[0] && contactInfo.fullName) {
       setParticipants(prev => {

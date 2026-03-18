@@ -48,9 +48,7 @@ public class TourController {
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "desc") String sortDir
     ) {
-        // TRƯỜNG HỢP 1: CÓ PHÂN TRANG (Dùng cho trang Listing/Search)
         if (page != null && size != null) {
-            // 1. Xử lý hướng sắp xếp (ASC/DESC)
             Sort.Direction direction = sortDir.equalsIgnoreCase("asc")
                     ? Sort.Direction.ASC
                     : Sort.Direction.DESC;
@@ -61,12 +59,8 @@ public class TourController {
 
             return ResponseEntity.ok(tourService.getAllToursWithPagination(pageable));
         }
-
-        // TRƯỜNG HỢP 2: KHÔNG PHÂN TRANG (Dùng cho Dropdown, Homepage)
         return ResponseEntity.ok(tourService.getAllTours());
     }
-
-    //UPDATED
     @PutMapping("/{idTour}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TourResponse> updateTour(
@@ -75,8 +69,6 @@ public class TourController {
         TourResponse updatedTour = tourService.updateTour(idTour, tourRequest);
         return ResponseEntity.ok(updatedTour);
     }
-
-    // DELETE
     @DeleteMapping("/{idTour}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String, String>> deleteTour(@PathVariable Long idTour) {
@@ -112,8 +104,6 @@ public class TourController {
         );
         return ResponseEntity.ok(tours);
     }
-
-    // Lọc nhanh theo giá
     @GetMapping("/filter/price-range")
     public ResponseEntity<List<TourResponse>> filterByPriceRange(
             @RequestParam BigDecimal min,
@@ -121,8 +111,6 @@ public class TourController {
     ) {
         return ResponseEntity.ok(tourService.findByPriceBetween(min, max));
     }
-
-    // Lọc theo duration
     @GetMapping("/filter/duration")
     public ResponseEntity<List<TourResponse>> filterByDuration(
             @RequestParam Integer days

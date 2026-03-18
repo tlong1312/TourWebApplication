@@ -50,8 +50,6 @@ public class CategoryService {
     public CategoryResponse updateCategory(Long id, CategoryRequest request) throws IOException{
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy category"));
-
-        // THÊM: Kiểm tra tên mới có trùng với category khác không
         if (!category.getName().equals(request.getName()) &&
                 categoryRepository.existsByName(request.getName())) {
             throw new RuntimeException("Tên category đã tồn tại");

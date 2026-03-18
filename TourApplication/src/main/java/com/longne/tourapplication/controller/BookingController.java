@@ -39,10 +39,7 @@ public class BookingController {
 
     @GetMapping("/vnpay-return")
     public void vnpayReturn(@RequestParam Map<String, String> params, HttpServletResponse response) throws IOException {
-        // Xử lý thanh toán (cập nhật booking, transaction...)
         bookingService.handleVNPayReturn(params);
-
-        // Chuyển hướng về frontend với tất cả query params từ VNPAY
         String queryString = params.entrySet().stream()
                 .map(e -> e.getKey() + "=" + URLEncoder.encode(e.getValue(), StandardCharsets.UTF_8))
                 .collect(Collectors.joining("&"));

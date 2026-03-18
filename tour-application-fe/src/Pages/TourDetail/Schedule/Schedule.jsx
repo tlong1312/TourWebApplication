@@ -8,14 +8,10 @@ export default function Schedule({ tour }) {
   const [selectedDate, setSelectedDate] = useState(
     tour?.schedules[0]?.departureDate ? new Date(tour.schedules[0].departureDate) : null
   );
-
-  // Get available dates
   const availableDates = Schedules.map(schedule => {
     const date = new Date(schedule.departureDate);
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
   });
-
-  // Find selected schedule
   const selectedSchedule = Schedules.find(schedule => {
     const scheduleDate = new Date(schedule.departureDate);
     const normalizedScheduleDate = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());

@@ -42,8 +42,6 @@ public class ChatBotController {
 
         } catch (Exception e) {
             log.error("❌ Chat error: {}", e.getMessage(), e);
-
-            // Return error response
             ChatResponse errorResponse = ChatResponse.builder()
                     .response("Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau. 🙏")
                     .suggestedTours(java.util.Collections.emptyList())

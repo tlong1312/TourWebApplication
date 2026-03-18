@@ -51,12 +51,8 @@ const StatisticsPage = () => {
         };
         fetchAll();
     }, []);
-
-    // Tổng doanh thu năm hiện tại
     const totalYearly = yearlyData.reduce((s, d) => s + (d.revenue || 0), 0);
-    // Doanh thu tháng gần nhất
     const latestMonth = monthlyData[monthlyData.length - 1];
-    // Trung bình tháng
     const avgMonthly = monthlyData.length
         ? monthlyData.reduce((s, d) => s + (d.revenue || 0), 0) / monthlyData.length
         : 0;
@@ -97,8 +93,6 @@ const StatisticsPage = () => {
             text: "text-orange-600",
         },
     ];
-
-    // --- Biểu đồ theo NĂM ---
     const yearlyChartData = {
         labels: yearlyData.map((d) => `Năm ${d.year}`),
         datasets: [
@@ -147,8 +141,6 @@ const StatisticsPage = () => {
             },
         },
     };
-
-    // --- Biểu đồ theo THÁNG ---
     const monthlyChartData = {
         labels: monthlyData.map((d) => `T${d.month}/${d.year}`),
         datasets: [

@@ -54,7 +54,6 @@ public class TourToolService {
             Integer duration,
             String categoryName
     ) {
-        // Tạo biến final để dùng trong lambda
         final String finalLocation = (location != null && location.isEmpty()) ? null : location;
         final String finalCategoryName = (categoryName != null && categoryName.isEmpty()) ? null : categoryName;
         final BigDecimal finalMinPrice = (minPrice != null && minPrice.compareTo(BigDecimal.ZERO) == 0) ? null : minPrice;

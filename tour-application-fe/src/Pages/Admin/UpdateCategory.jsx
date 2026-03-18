@@ -39,8 +39,6 @@ const UpdateCategory = () => {
           icon: null, // Input file không thể pre-fill file object vì lý do bảo mật
           isActive: data.isActive !== undefined ? data.isActive : true,
         });
-
-        // Nếu có icon cũ, bạn có thể hiển thị tên/url tại đây nếu cần
       } catch (err) {
         console.error("Lỗi tải dữ liệu danh mục:", err);
         setError(
@@ -179,7 +177,6 @@ const UpdateCategory = () => {
                 File mới đã chọn: **{fileName}**
               </span>
             ) : (
-              // Thông báo nếu người dùng chưa chọn file mới
               <span className={styles.fileName}>
                 Chọn file mới để thay thế icon hiện tại.
               </span>

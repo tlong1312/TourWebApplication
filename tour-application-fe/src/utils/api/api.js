@@ -7,8 +7,6 @@ const protocol = window.location.protocol;
 const API_URL = (hostname === "localhost" || hostname === "127.0.0.1")
   ? "http://localhost:8080"
   : `${protocol}//${hostname}`;
-
-// Tạo instance axios
 const api = axios.create({
   baseURL: API_URL,
   withCredentials: true,
@@ -16,8 +14,6 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-// Interceptor để tự động gắn token vào header
 api.interceptors.request.use(
   (config) => {
     const token = getToken();
@@ -42,8 +38,6 @@ const processQueue = (error, token = null) => {
   });
   failedQueue = [];
 }
-
-// Interceptor xử lý phản hồi lỗi 401
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
